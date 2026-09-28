@@ -1,0 +1,105 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-ink: #0e0c0a;
+  --color-ink-2: #15120f;
+  --color-ink-3: #1d1915;
+  --color-line: #2c261f;
+  --color-gold: #d6b26e;
+  --color-gold-light: #e9cf97;
+  --color-gold-dark: #a9854a;
+  --color-cream: #faf6ef;
+  --color-cream-2: #f2ebdf;
+  --color-sand: #e7dccb;
+  --color-muted: #7c7166;
+
+  --font-sans: 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-script: 'Cormorant Garamond', Georgia, serif;
+
+  --animate-fade-up: fade-up 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-slow-zoom: slow-zoom 18s ease-out both;
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes slow-zoom {
+    from { transform: scale(1.12); }
+    to { transform: scale(1); }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-cream font-sans text-ink antialiased;
+  }
+  ::selection {
+    @apply bg-gold text-ink;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-gold;
+  }
+}
+
+@utility container-x {
+  @apply mx-auto w-full max-w-7xl px-5 sm:px-8;
+}
+@utility eyebrow {
+  @apply text-[0.7rem] font-semibold tracking-[0.3em] text-gold-dark uppercase;
+}
+@utility btn {
+  @apply inline-flex items-center justify-center gap-2.5 rounded-sm px-6 py-3.5 text-xs font-bold tracking-[0.14em] uppercase transition duration-300 disabled:cursor-not-allowed disabled:opacity-60;
+}
+@utility btn-gold {
+  @apply btn bg-gold text-ink shadow-[0_10px_30px_-12px_rgba(214,178,110,0.8)] hover:bg-gold-light;
+}
+@utility btn-outline {
+  @apply btn border border-white/40 text-white hover:border-gold hover:text-gold;
+}
+@utility btn-dark {
+  @apply btn bg-ink text-cream hover:bg-ink-3;
+}
+@utility field {
+  @apply w-full rounded-sm border border-sand bg-white px-4 py-3 text-sm text-ink transition placeholder:text-muted/70 focus:border-gold focus:ring-2 focus:ring-gold/30 focus:outline-none;
+}
+@utility field-dark {
+  @apply w-full rounded-sm border border-line bg-ink-3 px-4 py-3 text-sm text-cream transition placeholder:text-cream/40 focus:border-gold focus:ring-2 focus:ring-gold/30 focus:outline-none;
+}
+@utility label {
+  @apply mb-1.5 block text-[0.7rem] font-semibold tracking-[0.14em] uppercase;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Hide scrollbar on horizontal chip rows */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }

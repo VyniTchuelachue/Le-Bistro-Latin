@@ -1,0 +1,21 @@
+{
+  "name": "le-bistro-latin",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site web du restaurant Le Bistro Latin — Bonapriso, Douala",
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c yellow,cyan \"npm run dev -w server\" \"npm run dev -w client\"",
+    "build": "npm run build -w client",
+    "start": "npm run start -w server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
